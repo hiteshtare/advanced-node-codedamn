@@ -1,6 +1,8 @@
 const http = require('http');
 const bcrypt = require('bcrypt');
 
+//Default = 3600 req/sec
+
 http.createServer((req,res)=>{
 
   bcrypt.hash('jg',2).then(hash=>{

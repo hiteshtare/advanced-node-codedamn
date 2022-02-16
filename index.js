@@ -1,4 +1,7 @@
-process.env.UV_THREADPOOL_SIZE = 4
+process.env.UV_THREADPOOL_SIZE = 12
+
+//Intel process comes with hyperthreading
+//i.e. one physical core - 2 logical cores
 
 const http = require('http');
 const bcrypt = require('bcrypt');
@@ -9,6 +12,8 @@ const bcrypt = require('bcrypt');
 //UV_THREADPOOL_SIZE - 2 = 2000 req/sec
 //UV_THREADPOOL_SIZE - 3 = 3000 req/sec
 //UV_THREADPOOL_SIZE - 4 = 3600 req/sec
+//UV_THREADPOOL_SIZE - 7 = 5500 req/sec
+//UV_THREADPOOL_SIZE - 12 = 6400 req/sec
 
 http.createServer((req,res)=>{
 

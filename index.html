@@ -1,0 +1,16 @@
+<button>Kill the Main Loop</button>
+
+<script>
+ function blockEventLoop(){
+   while(true);
+ }
+
+ const btn = document.querySelector('button');
+ btn.addEventListener('click',blockEventLoop,true);
+
+</script>
+
+<p>Some text. More text</p>
+
+<button>Just a button</button>
+<input type="text"/>

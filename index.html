@@ -1,16 +1,16 @@
-<button>Kill the Main Loop</button>
+<button id="btn1">Click Me</button>
 
 <script>
- function blockEventLoop(){
-   while(true);
- }
 
- const btn = document.querySelector('button');
- btn.addEventListener('click',blockEventLoop,true);
+  function scheduleWork() {
+    setTimeout(() => console.log('First'), 0);
+    setTimeout(() => console.log('Second'), 0);
+
+    Promise.resolve().then(() => console.log('First from microtask'));
+    Promise.resolve().then(() => console.log('Second from microtask'));
+  };
+
+  const btn = document.getElementById('btn1');
+  btn.addEventListener('click', scheduleWork, false);
 
 </script>
-
-<p>Some text. More text</p>
-
-<button>Just a button</button>
-<input type="text"/>

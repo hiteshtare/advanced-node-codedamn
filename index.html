@@ -3,11 +3,17 @@
 <script>
 
   function scheduleWork() {
-    setTimeout(() => console.log('First'), 0);
-    setTimeout(() => console.log('Second'), 0);
+    Promise.resolve().then(() => console.log('m1'));
+    Promise.resolve().then(() => console.log('m2'));
+    setTimeout(() => console.log('t1'), 0);
+    setTimeout(() => {
+      Promise.resolve().then(() => console.log('m3'))
+      Promise.resolve().then(() => console.log('m4'))
+      Promise.resolve().then(() => console.log('m5'))
+    }, 0);
+    setTimeout(() => console.log('t2'), 0);
+    setTimeout(() => console.log('t3'), 0);
 
-    Promise.resolve().then(() => console.log('First from microtask'));
-    Promise.resolve().then(() => console.log('Second from microtask'));
   };
 
   const btn = document.getElementById('btn1');

@@ -1,22 +1,44 @@
 <button id="btn1">Click Me</button>
+<button id="btn2">Programmtic Click</button>
 
 <script>
 
   function scheduleWork() {
-    Promise.resolve().then(() => console.log('m1'));
-    Promise.resolve().then(() => console.log('m2'));
-    setTimeout(() => console.log('t1'), 0);
+    Promise.resolve().then(() => console.log('#1 m1'));
+    Promise.resolve().then(() => console.log('#1 m2'));
+    setTimeout(() => console.log('#1 t1'), 0);
     setTimeout(() => {
-      Promise.resolve().then(() => console.log('m3'))
-      Promise.resolve().then(() => console.log('m4'))
-      Promise.resolve().then(() => console.log('m5'))
+      Promise.resolve().then(() => console.log('#1 m3'))
+      Promise.resolve().then(() => console.log('#1 m4'))
+      Promise.resolve().then(() => console.log('#1 m5'))
+      Promise.resolve().then(() => Promise.resolve().then(() => console.log('#1 m6')))
     }, 0);
-    setTimeout(() => console.log('t2'), 0);
-    setTimeout(() => console.log('t3'), 0);
+    setTimeout(() => console.log('#1 t2'), 0);
+    setTimeout(() => console.log('#1 t3'), 0);
 
+    console.log(`Hello #1 From Main Thread`);
+  };
+
+  function scheduleWorkAgain() {
+    Promise.resolve().then(() => console.log('#2 m1'));
+    Promise.resolve().then(() => console.log('#2 m2'));
+    setTimeout(() => console.log('#2 t1'), 0);
+    setTimeout(() => {
+      Promise.resolve().then(() => console.log('#2 m3'))
+      Promise.resolve().then(() => console.log('#2 m4'))
+      Promise.resolve().then(() => console.log('#2 m5'))
+    }, 0);
+    setTimeout(() => console.log('#2 t2'), 0);
+    setTimeout(() => console.log('#2 t3'), 0);
+
+    console.log(`Hello #2 From Main Thread`);
   };
 
   const btn = document.getElementById('btn1');
   btn.addEventListener('click', scheduleWork, false);
+  btn.addEventListener('click', scheduleWorkAgain, false);
+
+  const btn2 = document.getElementById('btn2');
+  btn2.addEventListener('click', btn.click());
 
 </script>
